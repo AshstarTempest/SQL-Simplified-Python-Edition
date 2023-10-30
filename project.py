@@ -23,24 +23,6 @@ def managementsys(sys):
         pass
 
 
-def initial_data():
-    default_data = ["Sl_no", "ID", "Firstname", "lastname", "age"]
-    fields = input("enter no of fields (default=5) :  ")
-    if fields == "":
-        fields = 5
-
-    field_data = []
-    for i in range(int(fields)):
-        if i <= 4:
-            data = input(f"enter {i} field (default: {default_data[i]}): ")
-        else:
-            data = input(f"enter {i} field ")
-
-        if data == "":
-            data = default_data[i]
-        field_data.append(data)
-    return field_data
-
 
 def csvusers(sys, initial_data):
     import csv
@@ -84,32 +66,139 @@ def codeexport(func_name, file):
         new_file.write(function_code)
 
 
-def main():
-
-    # sys will be the name of the project u want to create
-
-    sys = input(
-        "Enter which management system you want to make(eg: School , Hospital) : ")
-    managementsys(sys)  # creates a python file with the name
-    data = initial_data()
-    csvusers(sys, data)
-    # Binaryusers(sys, data)
-    # Textusers(sys, data)
-    MYsqlusers(sys, data)
-    # codeexport(MYsqlusers, sys)
-
-
 def mysqlmanagement(name, initial_data):
     import mysql.connector as m
     con = m.connect(host="localhost", user="root",
                     password="12345678", database="school")
     cur = con.cursor()
-    cur.execute(f"create table {name} ({initial_data[0]} int primary key auto_increment, {
-                initial_data[1]} varchar(30), {initial_data[2]} varchar(30), {initial_data[3]} int)")
+    cur.execute(f"create table {name} ({initial_data[0]} int primary key auto_increment, {initial_data[1]} varchar(10), {
+                initial_data[2]} varchar(30), {initial_data[3]} varchar(30), {initial_data[4]} int)")
 
     # Use the execute() method to execute the query with parameters
     con.commit()
     con.close()
+
+# TO GENERATE A SQL QUERY
+
+def initial_data():
+    default_data = ["Sl_no", "ID", "Firstname", "lastname", "age"]
+    fields = input("enter no of fields (default=5) :  ")
+    if fields == "":
+        fields = 5
+
+    field_data = []
+    for i in range(int(fields)):
+        if i <= 4:
+            data = input(f"enter {i} field (default: {default_data[i]}): ")
+        else:
+            data = input(f"enter {i} field ")
+
+        if data == "":
+            data = default_data[i]
+        field_data.append(data)
+    return field_data
+
+
+def querygen(table_name: str, column_data: list):
+    # no of columns excluding sl_no and id
+    data = {
+        'sl_no': 'int',
+        'ID': 'varchar(30)',
+    }
+    str1 = f"create table {table_name} (SL_no int primary key auto_increment, ID varchar(30)"
+    for i in range(2,len(column_data)):
+        column_name = column_data[i]
+        
+        tyype = input(f"Enter type of column for {column_name}, str / int : ")
+        if tyype == "int":
+            type_value = 'int'
+        elif tyype == "str":
+            type_value = 'varchar(30)'
+        data[column_name] = type_value
+        newstr = ' , ' + list(data.keys())[-1] +' ' +data[list(data.keys())[-1]]
+        
+        str1+=newstr
+    clear()
+    desc(data)
+    
+    
+
+
+
+
+    return str1 + ')'
+
+#this function takes a dict as input with field name and its value and prints it in cmd 
+def desc(data : dict):
+    from prettytable import PrettyTable
+    sql_table = PrettyTable()
+    sql_table.field_names = ["Field", "value",]
+    for i , j in data.items():
+        sql_table.add_row([i,j])
+    print(sql_table)
+
+#now complete standalone mysql project and testing data
+
+def mysql_init(table_name : str, initial_data :list):
+    import mysql.connector as m
+    con = m.connect(host="localhost", user="root",
+                    password="12345678", database="school")
+    cur = con.cursor()
+    
+    cur.execute(f"create table {table_name} ({initial_data[0]} int primary key auto_increment, {initial_data[1]} varchar(10), {
+                initial_data[2]} varchar(30), {initial_data[3]} varchar(30), {initial_data[4]} int)")
+
+    # Use the execute() method to execute the query with parameters
+    con.commit()
+    con.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def clear():
+    import os
+    os.system('cls')
+def main():
+
+    # sys will be the name of the project u want to create
+
+    # sys = input(
+    #     "Enter which management system you want to make(eg: School , Hospital) : ")
+    # managementsys(sys)  # creates a python file with the name
+    # data = initial_data()
+    # csvusers(sys, data)
+    # # Binaryusers(sys, data)
+    # # Textusers(sys, data)
+    # MYsqlusers(sys, data)
+    # # codeexport(MYsqlusers, sys)
+
+    # secodary_table = input("Enter secondary table name : ")
+    # mysqlmanagement(secodary_table, data)
+    #print(querygen("marks", 4))
+    ini_data = initial_data()
+    query = querygen("marks",ini_data)
+    print(query)
+
 
 
 def csvlmanagement(name, initial_data):

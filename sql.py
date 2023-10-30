@@ -1,17 +1,21 @@
 class MySql:
     def __init__(self):
-        pass
+        self.list_of_tables = []
 
     def clear(self):
         import os
         os.system('cls')
 
-    def connection():
+    def connection(self):
         import mysql.connector as m
         con = m.connect(host="localhost", user="root",
                         password="12345678", database="school")
         cur = con.cursor()
+
+        return con,cur
     
+    
+
 
     #this function takes a dict as input with field name and its value and prints it in cmd 
     def desc(self ,data : dict):
@@ -49,9 +53,23 @@ class MySql:
         self.desc(data)
         return str1 + ')'
     
-
+    def interference(self):
+        #create temp interference for mysql standalone project 
+        
+        pass
+    
+    def create_table(self , table_order : str):
+        con, cur = self.connection()
+        table_name = input(f"enter {table_order} Table name :  ")
+        cur.execute(self.querygen(table_name))
+        con.commit()
+        print("______SUCCESSFULLY CREATED______")
+        con.close()
+        self.list_of_tables.append(table_name)
         
     
+    def databaseconn():
+        pass
 
 
     def initial_data( self):
@@ -71,9 +89,29 @@ class MySql:
                 data = default_data[i]
             field_data.append(data)
         return field_data
+    def osmsg(self,msg):
+        print(msg)
+
+
+    def createdatabases(self):
+        no_of_databases = int(input("Enter no of databases : "))
+        
+        for i in range(no_of_databases):
+            if i == 0 :
+                self.create_table("Primary")
+            elif i == 1 :
+                self.create_table("Secondary")
+            elif i == 2 :
+                self.create_table("Tertiary ")
+                self.osmsg("Recommended not to create more that this ")
+            else:
+                self.create_table(str(i) + "th ")
+
+        return self.list_of_tables
+    
 
 obj = MySql()
 #data = MySql.initial_data(input("enter no of fields (default=5) :  "))
-query=obj.querygen(input("enter Table name :  "))
-print(query)
-        
+#query=obj.querygen(input("enter Table name :  "))
+database = obj.createdatabases()
+print(database)

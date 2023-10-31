@@ -18,25 +18,29 @@ class codeexport:
 
 
     def selectstack(self):
-
         utils = {
-            1:"mysql",
-            2:"work in progress"
+            1: "mysql",
+            2: "work in progress"
         }
-        try:
-            no_of_database = int(input("enter no of databases to use in the project (default : 2) : "))
-        except:
-            no_of_database = 2
-        for i in range (no_of_database):
+        while True:
+            try:
+                no_of_database = int(input("enter no of databases to use in the project (default : 2) : ")
+                break
+            except ValueError:
+                print("Invalid input. Please enter a valid number of databases.")
+    
+        for i in range(no_of_database):
             self.projectutils()
-            try : 
-                util = int(input(f"select Slno for database {i + 1 } (default 1 ) : "))
-            except :
-                util = 1
+            while True:
+                try:
+                    util = int(input(f"select Slno for database {i + 1} (default 1): ")
+                    break
+                except ValueError:
+                    print("Invalid input. Please enter a valid number.")
             self.utilsused.append(util)
             self.clear()
-
         return self.utilsused
+
 
 
 

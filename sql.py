@@ -111,9 +111,31 @@ class MySql:
 
         return self.list_of_tables
     
+    # this function mains to inset data in the created database
+    def insertdata(self):
+        pass
+
+    # this function generates random n digit phone no 
+    def randphonegen(self,n):
+        india_phone = "+91"
+        import random 
+        for i in range(n):
+            if i ==0:
+                india_code+=str(random.randrange(1, 10))
+            india_code+=str(random.randrange(0,10))
+        return india_phone
+
+    
+
+
+
+
+
+
 
 obj = MySql()
 #data = MySql.initial_data(input("enter no of fields (default=5) :  "))
 #query=obj.querygen(input("enter Table name :  "))
-database = obj.createdatabases()
-print(database)
+# database = obj.createdatabases()
+# print(database)
+print(obj.randphonegen(10))

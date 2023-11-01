@@ -8,63 +8,21 @@ This project provides a set of functions to create a school class 12 management 
 
 The project creates a folder named `Project` to store the files for different data storage methods.
 
-## Functions
+# Project Documentation Updates
 
-### `projectutils()`
+In this update, I've removed the function descriptions from this main Markdown file, and I'm creating separate Markdown files for each Python file. Our primary focus is on CSV and MySQL interactions at the moment, so I'll create two separate Markdown files for these topics. Please make the following changes when creating new function descriptions:
 
-This function displays a table that lists the available data storage methods (CSV, Binary, Text, MySQL) with their respective serial numbers.
+1. **CSV Interactions**
+   - Create a dedicated Markdown file named "csv.md" for all function descriptions related to CSV interactions.
+   - Include function descriptions for CSV-related methods in the "csv.md" file.
+   - Update this main Markdown file with a link or reference to the "csv.md" file when it's created.
 
-### `managementsys(sys)`
+2. **MySQL Interactions**
+   - Create a dedicated Markdown file named "mysql.md" for all function descriptions related to MySQL interactions.
+   - Include function descriptions for MySQL-related methods in the "mysql.md" file.
+   - Update this main Markdown file with a link or reference to the "mysql.md" file when it's created.
 
-This function creates a Python file in the `Project` folder for the specified data storage method (e.g., `school.py`, `hospital.py`).
-
-### `csvusers(sys, initial_data)`
-
-Creates and appends records to a CSV file for the given data storage method.
-
-### `Binaryusers(sys, initial_data)`
-
-Appends records to a binary file for the given data storage method.
-
-### `Textusers(sys, initial_data)`
-
-Appends records to a text file for the given data storage method.
-
-### `MYsqlusers(sys, initial_data)`
-
-Creates a MySQL table for the given data storage method and inserts records.
-
-### `codeexport(func_name, file)`
-
-Appends the code of a specific function to the Python file for the given data storage method.
-
-### `mysqlmanagement(name, initial_data)`
-
-Creates a MySQL table for a secondary data storage method and inserts records.
-
-### `initial_data()`
-
-Collects the initial field names for a table and returns them as a list.
-
-### `querygen(table_name, column_data)`
-
-Generates a SQL query for creating a MySQL table with the specified field names.
-
-### `desc(data)`
-
-Displays a PrettyTable containing field names and values in the command line.
-
-### `mysql_init(table_name, initial_data)`
-
-Creates a MySQL table for a standalone project.
-
-### `clear()`
-
-Clears the command line screen.
-
-### `main()`
-
-The main function where you can define your project logic.
+By following this approach, we can keep the documentation organized and maintain separate files for different parts of the project.
 
 ## Usage
 

@@ -1,6 +1,7 @@
 class MySql:
     def __init__(self):
         self.list_of_tables = []
+        self.last_id = None
 
     def clear(self):
         import os
@@ -138,6 +139,43 @@ class MySql:
                 india_code+=str(random.randrange(1, 10))
             india_code+=str(random.randrange(0,10))
         return india_phone
+    # This helps to generate a n no of words id which can be seqential or totally random 
+    def IDgen(self,No_of_letters:int,randomstate:bool=False,const_char:str= "E"):
+        import random
+        import string 
+        id = []
+        
+        const_id = []
+        alphabets = list(string.ascii_letters)
+        if randomstate == True:
+            for i in range(No_of_letters):
+                id.append(random.choice(alphabets))
+            return "".join(id)
+        if randomstate == False :
+            if self.last_id != None:
+                self.last_id = self.last_id[:len(self.last_id)-1] +str(int(self.last_id[-1]) + 1) 
+                return const_char+ self.last_id
+            else:
+                pass
+            for i in range(No_of_letters-1):
+                if i < No_of_letters -2:
+                    const_id.append('0')
+                else:
+                    const_id.append('1')
+            #print(f"-------{const_id}-----------")
+            self.last_id = "".join(const_id)
+            
+            return const_char+"".join(const_id)
+            
+
+
+
+                
+
+
+
+            
+
 
     
 
@@ -152,4 +190,5 @@ obj = MySql()
 #query=obj.querygen(input("enter Table name :  "))
 # database = obj.createdatabases()
 # print(database)
-print(obj.randphonegen(10))
+#print(obj.randphonegen(10))
+

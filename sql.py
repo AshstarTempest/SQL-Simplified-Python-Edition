@@ -27,32 +27,39 @@ class MySql:
             sql_table.add_row([i,j])
         print(sql_table)
 
-    def querygen(self,table_name: str):
+    def querygen(self, table_name: str):
         column_data = self.initial_data()
-        
-    # no of columns excluding sl_no and id
-
+    
+        # no of columns excluding sl_no and id
         data = {
             'sl_no': 'int',
             'ID': 'varchar(30)',
         }
         str1 = f"create table {table_name} (SL_no int primary key auto_increment, ID varchar(30)"
-        for i in range(2,len(column_data)):
+    
+        for i in range(2, len(column_data)):
             column_name = column_data[i]
-            
-            tyype = input(f"Enter type of column for {column_name}, str / int : ")
-            if tyype == "int":
-                type_value = 'int'
-            elif tyype == "str":
-                type_value = 'varchar(30)'
-            data[column_name] = type_value
-            newstr = ' , ' + list(data.keys())[-1] +' ' +data[list(data.keys())[-1]]
-            
-            str1+=newstr
+            while True:
+                try:
+                    tyype = input(f"Enter type of column for {column_name}, str / int : ")
+                    if tyype == "int":
+                        type_value = 'int'
+                    elif tyype == "str":
+                        type_value = 'varchar(30)'
+                    else:
+                        raise ValueError("Invalid input. Please enter 'str' or 'int'.")
+                    data[column_name] = type_value
+                    newstr = ' , ' + list(data.keys())[-1] + ' ' + data[list(data.keys())[-1]]
+                    str1 += newstr
+                    break
+                except ValueError as e:
+                    print(e)
+    
         self.clear()
         self.desc(data)
         print(str1 + ')')
         return str1 + ')'
+
     
     def interference(self):
         #create temp interference for mysql standalone project 
@@ -74,23 +81,30 @@ class MySql:
         pass
 
 
-    def initial_data( self):
+    def initial_data(self):
         default_data = ["Sl_no", "ID", "Firstname", "lastname", "age"]
-        fields = input("enter no of fields (default=5) :  ")
-        if fields == "":
-            fields = 5
-
+        while True:
+            try:
+                fields = input("enter no of fields (default=5) : ")
+                if fields == "":
+                    fields = 5
+                fields = int(fields)
+                break
+            except ValueError:
+                print("Invalid input. Please enter a valid number of fields.")
+    
         field_data = []
-        for i in range(int(fields)):
+        for i in range(fields):
             if i <= 4:
                 data = input(f"enter {i} field (default: {default_data[i]}): ")
             else:
                 data = input(f"enter {i} field ")
-
+    
             if data == "":
                 data = default_data[i]
             field_data.append(data)
         return field_data
+
     def osmsg(self,msg):
         print(msg)
 

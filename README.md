@@ -12,12 +12,12 @@ The project creates a folder named `Project` to store the files for different da
 
 In this update, I've removed the function descriptions from this main Markdown file, and I'm creating separate Markdown files for each Python file. Our primary focus is on CSV and MySQL interactions at the moment, so I'll create two separate Markdown files for these topics. Please make the following changes when creating new function descriptions:
 
-1. **CSV Interactions**
+1. **CSV https://github.com/AshstarTempest/SQL-Simplified-Python-Edition/blob/main/csv.md**
    - Create a dedicated Markdown file named "csv.md" for all function descriptions related to CSV interactions.
    - Include function descriptions for CSV-related methods in the "csv.md" file.
    - Update this main Markdown file with a link or reference to the "csv.md" file when it's created.
 
-2. **MySQL Interactions**
+2. **MySQL https://github.com/AshstarTempest/SQL-Simplified-Python-Edition/blob/main/sql.md#this-description-is-for-python-sqlpy-file**
    - Create a dedicated Markdown file named "mysql.md" for all function descriptions related to MySQL interactions.
    - Include function descriptions for MySQL-related methods in the "mysql.md" file.
    - Update this main Markdown file with a link or reference to the "mysql.md" file when it's created.

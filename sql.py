@@ -153,8 +153,7 @@ class MySql:
             return "".join(id)
         if randomstate == False :
             if self.last_id != None:
-                self.last_id = self.last_id[:len(self.last_id)-1] +str(int(self.last_id[-1]) + 1) 
-                return const_char+ self.last_id
+                pass
             else:
                 pass
             for i in range(No_of_letters-1):
@@ -163,9 +162,9 @@ class MySql:
                 else:
                     const_id.append('1')
             #print(f"-------{const_id}-----------")
-            self.last_id = "".join(const_id)
+            self.last_id =const_char+  "".join(const_id)
             
-            return const_char+"".join(const_id)
+            return self.last_id
             
 
 
@@ -192,3 +191,4 @@ obj = MySql()
 # print(database)
 #print(obj.randphonegen(10))
 
+print(obj.IDgen(6,False,"A"))

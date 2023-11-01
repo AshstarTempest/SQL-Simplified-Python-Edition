@@ -51,6 +51,7 @@ class MySql:
             str1+=newstr
         self.clear()
         self.desc(data)
+        print(str1 + ')')
         return str1 + ')'
     
     def interference(self):
@@ -66,6 +67,7 @@ class MySql:
         print("______SUCCESSFULLY CREATED______")
         con.close()
         self.list_of_tables.append(table_name)
+        self.querygen(table_name)
         
     
     def databaseconn():

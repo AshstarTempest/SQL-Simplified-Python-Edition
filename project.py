@@ -48,7 +48,7 @@ def Textusers(sys, initial_data):
 def MYsqlusers(sys, initial_data):
     import mysql.connector as m
     con = m.connect(host="localhost", user="root",
-                    password="12345678", database="school")
+                    password="12345678", database="trade")
     cur = con.cursor()
     cur.execute(f"create table {sys} ({initial_data[0]} int primary key auto_increment, {initial_data[1]} varchar(10), {
                 initial_data[2]} varchar(30), {initial_data[3]} varchar(30), {initial_data[4]} int)")
@@ -182,22 +182,21 @@ def main():
 
     # sys will be the name of the project u want to create
 
-    # sys = input(
-    #     "Enter which management system you want to make(eg: School , Hospital) : ")
-    # managementsys(sys)  # creates a python file with the name
-    # data = initial_data()
-    # csvusers(sys, data)
-    # # Binaryusers(sys, data)
-    # # Textusers(sys, data)
-    # MYsqlusers(sys, data)
-    # # codeexport(MYsqlusers, sys)
+    sys = input("Enter which management system you want to make(eg: School , Hospital) : ")
+    managementsys(sys)  # creates a python file with the name
+    data = initial_data()
+    csvusers(sys, data)
+    Binaryusers(sys, data)
+    Textusers(sys, data)
+    MYsqlusers(sys, data)
+    codeexport(MYsqlusers, sys)
 
     # secodary_table = input("Enter secondary table name : ")
     # mysqlmanagement(secodary_table, data)
     #print(querygen("marks", 4))
-    ini_data = initial_data()
-    query = querygen("marks",ini_data)
-    print(query)
+    # ini_data = initial_data()
+    # query = querygen("",ini_data)
+    # print(query)    
 
 
 

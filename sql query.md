@@ -8,7 +8,7 @@ insert into users (firstname,lastname,age) values ('rajesh','kumar',20);
 
 insert into marks (ID,physics,chem,maths,bio,pe,physco) values ();
 
-INSERT INTO informantion (ID, admsndate, mothersname, fathersname)
+INSERT INTO gu (ID, admsndate, mothersname, fathersname)
 VALUES
 (1, '2023-10-30', 'Alice', 'Bob'),
 (2, '2023-10-31', 'Charlie', 'David'),
@@ -20,3 +20,5 @@ VALUES
 (8, '2023-11-06', 'Olivia', 'Peter'),
 (9, '2023-11-07', 'Sophia', 'Thomas'),
 (10, '2023-11-08', 'William', 'Zoe');
+
+insert into gu (ID,Firstname,lastname ,age) values (E00001,Sahana,Chauhan,19)

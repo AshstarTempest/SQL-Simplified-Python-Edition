@@ -2,6 +2,8 @@ class MySql:
     def __init__(self):
         self.list_of_tables = []
         self.last_id = None
+        self.table_contents = []
+    
 
     def clear(self):
         import os
@@ -20,12 +22,14 @@ class MySql:
 
     #this function takes a dict as input with field name and its value and prints it in cmd 
     def desc(self ,data : dict):
-
+        sql_table_contents = {}
         from prettytable import PrettyTable
         sql_table = PrettyTable()
         sql_table.field_names = ["Field", "value",]
         for i , j in data.items():
             sql_table.add_row([i,j])
+            sql_table_contents[i] = j
+        self.table_contents.append(sql_table_contents)
         print(sql_table)
 
     def querygen(self, table_name: str):
@@ -75,11 +79,8 @@ class MySql:
         print("______SUCCESSFULLY CREATED______")
         con.close()
         self.list_of_tables.append(table_name)
-        self.querygen(table_name)
         
-    
-    def databaseconn():
-        pass
+        
 
 
     def initial_data(self):
@@ -127,8 +128,28 @@ class MySql:
         return self.list_of_tables
     
     # this function mains to inset data in the created database
-    def insertdata(self):
-        pass
+    def insertdata_before(self , table_no :int = 0):
+        con, cur = self.connection()
+        id = self.IDgen(6)
+        name = self.random_name_gen()
+        age = self.agegen()
+        st = f"inset into {self.list_of_tables[table_no]} ({self.table_contents[table_no][1],self.table_contents[table_no][2],self.table_contents[table_no][3],self.table_contents[table_no][4]}) values  ({id},{name[0]},{name[1]},{age}) "
+        cur.execute(st)
+        con.commit()
+        con.close()
+        print(st)
+    def insertdata_after(self , table_name :str ):
+        con, cur = self.connection()
+        id = self.IDgen(6)
+        name = self.random_name_gen()
+        age = self.agegen()
+        st = f"insert into {table_name} (ID,Firstname,lastname ,age) values ('{id}','{name[0]}','{name[1]}',{age}) "
+ 
+        cur.execute(st)
+        con.commit()
+        con.close()
+    
+        return "data Successfully inserted"
 
     # this function generates random n digit phone no 
     def randphonegen(self,n):
@@ -153,6 +174,12 @@ class MySql:
             return "".join(id)
         if randomstate == False :
             if self.last_id != None:
+                temp_id = int("1" + self.last_id[1:])
+                self.last_id = const_char + str(temp_id+1)[1:]
+                return self.last_id
+
+                
+                
                 pass
             else:
                 pass
@@ -167,13 +194,50 @@ class MySql:
             return self.last_id
             
 
+    def random_name_gen(self,split_names:bool = True):
+        import data
+        import random
+        if split_names == True:
+            first_names = data.indian_student_first_names
+            last_names = data.indian_student_last_names
+            names = [random.choice(first_names),random.choice(last_names)]
+            return names
+        first_names = data.indian_student_first_names
+      #  print(first_names)
+        last_names = data.indian_student_last_names
+        name = random.choice(first_names) + " " + random.choice(last_names)
 
+        return name
+    
+    def generate_institute_name(self):
+        import random
+        import data
+        prefixes = data.prefixes
+        nouns = data.nouns
+        adjectives = data.adjectives
+        prefix = random.choice(prefixes)
+        noun = random.choice(nouns)
+        adjective = random.choice(adjectives)
+        
+        # Randomly select the order of words
+        order = random.choice(["prefix-noun", "noun-prefix", "adjective-noun", "noun-adjective"])
+        
+        if order == "prefix-noun":
+            name = f"{prefix} {noun}"
+        elif order == "noun-prefix":
+            name = f"{noun} {prefix}"
+        elif order == "adjective-noun":
+            name = f"{adjective} {noun} college"
+        elif order == "noun-adjective":
+            name = f"{noun} {adjective} college"
+    
+        return name
 
-                
-
-
-
-            
+    def agegen(self):
+        import random
+        age = random.randrange(18, 45)
+        return age
+    
 
 
     
@@ -187,8 +251,15 @@ class MySql:
 obj = MySql()
 #data = MySql.initial_data(input("enter no of fields (default=5) :  "))
 #query=obj.querygen(input("enter Table name :  "))
-# database = obj.createdatabases()
+#database = obj.createdatabases()
 # print(database)
 #print(obj.randphonegen(10))
 
-print(obj.IDgen(6,False,"A"))
+#print(obj.IDgen(6,False,"A"))
+#print(obj.random_name_gen())
+#print(obj.generate_institute_name())
+
+
+# print(obj.agegen())
+for i in range(25000):
+    print(obj.insertdata_after('gu'))

@@ -16,13 +16,17 @@ In this update, I've removed the function descriptions from this main Markdown f
    - Create a dedicated Markdown file named "csv.md" for all function descriptions related to CSV interactions.
    - Include function descriptions for CSV-related methods in the "csv.md" file.
    - Update this main Markdown file with a link or reference to the "csv.md" file when it's created.
-mdfile :  https://github.com/AshstarTempest/SQL-Simplified-Python-Edition/blob/main/csv.md
+
+****mdfile :  https://github.com/AshstarTempest/SQL-Simplified-Python-Edition/blob/main/csv.md****
 2. **MySQL**
    - Create a dedicated Markdown file named "mysql.md" for all function descriptions related to MySQL interactions.
    - Include function descriptions for MySQL-related methods in the "mysql.md" file.
    - Update this main Markdown file with a link or reference to the "mysql.md" file when it's created.
-mdfile :  https://github.com/AshstarTempest/SQL-Simplified-Python-Edition/blob/main/sql.md#this-description-is-for-python-sqlpy-files
-By following this approach, we can keep the documentation organized and maintain separate files for different parts of the project.
+****mdfile :  https://github.com/AshstarTempest/SQL-Simplified-Python-Edition/blob/main/sql.md****
+
+
+
+### By following this approach, we can keep the documentation organized and maintain separate files for different parts of the project.###
 
 ## Usage
 
